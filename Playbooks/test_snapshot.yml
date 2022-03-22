@@ -1,0 +1,19 @@
+---
+- name: Linux staging maintenance
+  hosts: all
+  vars:
+
+  serial: 2
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Send test email
+      mail:
+        host: "{{ smtp_host }}"
+        username: "{{ smtp_username }}"
+        password: "{{ smtp_password }}"
+        to: "{{ notify_test_to }}"
+        from: "{{ notify_from }}"
+        subject: "Something tested"
+        body: "Something tested!"
+      delegate_to: localhost

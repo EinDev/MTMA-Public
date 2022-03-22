@@ -1,0 +1,10 @@
+- name: Send test email
+  mail:
+    host: "{{ smtp_host }}"
+    username: "{{ smtp_username }}"
+    password: "{{ smtp_password }}"
+    to: "{{ notify_test_to }}"
+    from: "{{ notify_from }}"
+    subject: "[{{ inventory_hostname }}] {{ notify_subject }}"
+    body: "Vars: {{ hostvars[inventory_hostname] | to_nice_yaml }}"
+  delegate_to: localhost

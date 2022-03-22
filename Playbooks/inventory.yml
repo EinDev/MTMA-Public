@@ -1,0 +1,29 @@
+all:
+  hosts:
+    staging-web:
+      ansible_host: "192.168.203.3"
+      proxmox_id: '107'
+    staging-print:
+      ansible_host: "192.168.203.6"
+      proxmox_id: '109'
+    prod-web:
+      ansible_host: "192.168.203.7"
+      proxmox_id: '110'
+
+webservers:
+  hosts:
+    staging-web:
+    prod-web:
+
+printservers:
+  hosts:
+    staging-print:
+
+staging:
+  hosts:
+    staging-web:
+    staging-print:
+
+production:
+  hosts:
+    prod-web:

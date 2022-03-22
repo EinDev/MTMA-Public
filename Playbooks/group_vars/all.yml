@@ -1,0 +1,16 @@
+proxmox_host: "fsn1.honeypot.link"
+proxmox_token_secret: "c36cd4bb-0428-483b-aa39-7d604e1894af"
+proxmox_user: "root@pam"
+proxmox_token_id: "test"
+proxmox_node: "fsn1"
+smtp_host: "phoenix.freefileuploads.com"
+smtp_username: "awx-notify.mtma@ein.dev"
+smtp_password: "sFKYm5gvdgu#"
+notify_test_to: ["ich.bin@ein.dev"]
+notify_from: "MTMA awx notification <awx-notify.mtma@ein.dev>"
+
+ansible_user: user
+ansible_ssh_pass: C8sBFxoqfh
+ansible_sudo_pass: C8sBFxoqfh
+ansible_become: true
+ansible_become_method: sudo
