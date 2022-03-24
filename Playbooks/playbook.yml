@@ -12,6 +12,10 @@
   #  serial: 2
   gather_facts: false
   tasks:
+    - name: Restart time sync service
+      systemd:
+        name: systemd-timesyncd
+        state: restarted
     - name: Create new VM snapshot
       community.general.proxmox_snap:
         api_user: "{{ proxmox_user }}"
@@ -33,6 +37,10 @@
           upgrade: yes
           autoclean: yes
           autoremove: yes
+        register: result
+        retries: 3
+        delay: 10
+        until: result is not failed
       - name: Reboot after Update
         reboot:
           msg: "Automatic Update via ansible"
@@ -42,7 +50,7 @@
           post_reboot_delay: 30
           test_command: whoami
       - name: Check operation
-        command: "/bin/bash echo yay"
+        command: "{{ check_command }}"
         register: operation_check
       rescue:
         - set_fact:
@@ -58,4 +66,15 @@
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
             state: rollback
+          delegate_to: localhost
+        - name: Delete VM snapshot
+          community.general.proxmox_snap:
+            api_user: "{{ proxmox_user }}"
+            api_token_id: "{{ proxmox_token_id }}"
+            api_token_secret: "{{ proxmox_token_secret }}"
+            api_host: "{{ proxmox_host }}"
+            validate_certs: no
+            vmid: "{{ proxmox_id }}"
+            snapname: pre-updates
+            state: removed
           delegate_to: localhost
