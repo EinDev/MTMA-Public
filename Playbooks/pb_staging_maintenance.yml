@@ -23,7 +23,7 @@
         snapname: pre-updates
         state: present
         vmstate: yes
-      connection: local
+      delegate_to: localhost
     - block:
       - name: Apt update
         apt:
@@ -62,7 +62,7 @@
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
             state: rollback
-          connection: local
+          delegate_to: localhost
         - name: Restart time sync service
           systemd:
             name: systemd-timesyncd
@@ -77,4 +77,4 @@
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
             state: removed
-          connection: local
+          delegate_to: localhost
