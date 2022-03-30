@@ -4,10 +4,6 @@
   #  serial: 2
   gather_facts: false
   tasks:
-    - name: Restart time sync service
-      systemd:
-        name: systemd-timesyncd
-        state: restarted
     - name: Create new VM snapshot
       community.general.proxmox_snap:
         api_user: "{{ proxmox_user }}"
@@ -56,6 +52,10 @@
             snapname: pre-updates
             state: rollback
           delegate_to: localhost
+        - name: Restart time sync service
+          systemd:
+            name: systemd-timesyncd
+            state: restarted
         - name: Delete VM snapshot
           community.general.proxmox_snap:
             api_user: "{{ proxmox_user }}"
