@@ -69,7 +69,7 @@
           delegate_to: jumpsrv
 
 - name: Delete all snapshots
-  hosts: all
+  hosts: all_hosts
   gather_facts: false
   tasks:
     - name: Delete Snapshot
