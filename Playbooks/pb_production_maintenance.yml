@@ -67,3 +67,19 @@
             snapname: pre-updates
             state: removed
           delegate_to: jumpsrv
+
+- name: Delete all snapshots
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Delete Snapshot
+      community.general.proxmox_snap:
+        api_user: "{{ proxmox_user }}"
+        api_token_id: "{{ proxmox_token_id }}"
+        api_token_secret: "{{ proxmox_token_secret }}"
+        api_host: "{{ proxmox_host }}"
+        validate_certs: no
+        vmid: "{{ proxmox_id }}"
+        snapname: pre-updates
+        state: removed
+      delegate_to: jumpsrv
