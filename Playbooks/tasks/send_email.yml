@@ -7,4 +7,4 @@
     from: "{{ notify_from }}"
     subject: "[{{ inventory_hostname }}] {{ notify_subject }}"
     body: "Vars: {{ hostvars[inventory_hostname] | to_nice_yaml }}"
-  delegate_to: localhost
+  delegate_to: jumpsrv

@@ -15,7 +15,7 @@
     - name: Install proxmox API dependency
       pip:
         name: proxmoxer
-      delegate_to: localhost
+      delegate_to: jumpsrv
     - name: Create new VM snapshot
       community.general.proxmox_snap:
         api_user: "{{ proxmox_user }}"
@@ -27,7 +27,7 @@
         snapname: pre-updates
         state: present
         vmstate: yes
-      delegate_to: localhost
+      delegate_to: jumpsrv
     - block:
       - name: Apt update
         apt:
@@ -66,7 +66,7 @@
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
             state: rollback
-          delegate_to: localhost
+          delegate_to: jumpsrv
         - name: Restart time sync service
           systemd:
             name: systemd-timesyncd
@@ -81,4 +81,4 @@
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
             state: removed
-          delegate_to: localhost
+          delegate_to: jumpsrv
