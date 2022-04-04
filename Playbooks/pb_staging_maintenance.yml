@@ -80,5 +80,5 @@
             validate_certs: no
             vmid: "{{ proxmox_id }}"
             snapname: pre-updates
-            state: removed
+            state: absent
           delegate_to: jumpsrv
