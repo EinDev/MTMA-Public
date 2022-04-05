@@ -3,8 +3,9 @@
 2. [Install Minikube Cluster](#Install-Minikube-Cluster)
 3. [Install Ansible AWX](#Install-Ansible-AWX)
 4. [Install Nginx](#Install-Nginx)
-5. [FAQs](#faqs)
-
+5. [Install Proxmoxer](#Install-Proxmoxer)
+6. [FAQs](#faqs)
+7. [Sources](#sources)
 
 ### Install Linux Update
 ***
@@ -240,6 +241,27 @@ sudo nano /etc/nginx/sites-available/default
 ```
 systemctl reload nginx.service
 ```
+### Install Proxmoxer
+***
+**Install python3**
+```
+sudo apt install python-is-python3
+```
+**Install pip**
+```
+sudo apt install python3-pip
+```
+**Install Proxmoxer**
+```
+pip install proxmoxer
+pip install requests
+pip install paramiko
+pip install openssh_wrapper
+```
+**Install Proxmox Ansible module**
+```
+ansible-galaxy collection install community.general
+```
 ### FAQs
 ***
 **How can I get the password of the admin user after install?**
@@ -254,3 +276,12 @@ kubectl get secret -n mtma-awx mtma-awx-postgres-configuration -o jsonpath="{.da
 ```
 kubectl get secret -n mtma-awx mtma-awx-postgres-configuration -o jsonpath="{.data.password}" | base64 --decode
 ```
+
+### Sources
+***
+A list of sources used within the project:
+* [Install minikube](https://kubernetes.io/de/docs/tasks/tools/install-minikube/#linux)
+* [Install docker](https://docs.docker.com/engine/install/ubuntu/)
+* [Install Ansible AWX](https://github.com/ansible/awx-operator)
+* [Install Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
+* [Install certbot](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
