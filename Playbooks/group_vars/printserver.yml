@@ -1,1 +1,0 @@
-check_command: '/bin/sh -c ''curl localhost:80 | grep -q "Printserver running"'''
