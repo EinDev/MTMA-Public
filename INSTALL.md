@@ -78,10 +78,33 @@ sudo usermod -aG docker $USER && newgrp docker
 **Set namespace environment variable**
 ```
 export NAMESPACE=mtma-awx
+echo export NAMESPACE=mtma-awx >> .profile
 ```
-**Start minikube cluster**
+**Create systemd unit service for minikube**
 ```
-minikube start --cpus=4 --memory=6g --addons=ingress --driver=docker --namespace=$NAMESPACE
+sudo nano /etc/systemd/system/minikube.service
+```
+```
+[Unit]
+Description=minikube
+After=sshd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=user
+WorkingDirectory=/home/user
+ExecStart=/usr/local/bin/minikube start --cpus=4 --memory=6g --addons=ingress --driver=docker --namespace=mtma-awx
+ExecStop=/usr/local/bin/minikube stop
+
+[Install]
+WantedBy=multi-user.target
+```
+```
+systemctl enable minikube.service
+```
+```
+systemctl start minikube.service
 ```
 **Check minikube Status**
 ```
