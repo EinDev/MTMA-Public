@@ -1,1 +1,0 @@
-check_command: '/bin/sh -c ''systemctl status tomcat9 | egrep -q "^[ ]+Active: active" && curl localhost:8080'''
