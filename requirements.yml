@@ -1,3 +1,4 @@
 ---
 collections:
-- community.general
+- name: community.general
+  source: 'https://github.com/EinDev/community.general.git'
