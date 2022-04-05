@@ -83,7 +83,12 @@
         snapname: pre-updates
         state: absent
       delegate_to: jumpsrv
-    - name: CheckDNS
-      command: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
-    - name: CheckNTP
-      command: 'timedatectl status | egrep -q "System clock synchronized: yes"'
+    - block:
+        - name: CheckDNS
+          command: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
+        - name: CheckNTP
+          command: 'timedatectl status | egrep -q "System clock synchronized: yes"'
+      rescue:
+        - set_fact:
+            notify_subject: "NTP/DNS not succesful!"
+        - include_tasks: tasks/send_email.yml
