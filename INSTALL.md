@@ -224,7 +224,10 @@ systemctl reload nginx.service
 kubectl get secret mtma-awx-admin-password -o jsonpath="{.data.password}" | base64 --decode
 ```
 **How can I get the database user?**
+```
 kubectl get secret -n mtma-awx mtma-awx-postgres-configuration -o jsonpath="{.data.username}" | base64 --decode
-
+```
 **How can I get the database password?**
+```
 kubectl get secret -n mtma-awx mtma-awx-postgres-configuration -o jsonpath="{.data.password}" | base64 --decode
+```
