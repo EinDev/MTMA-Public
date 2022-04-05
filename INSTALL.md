@@ -241,7 +241,7 @@ sudo nano /etc/nginx/sites-available/default
 ```
 systemctl reload nginx.service
 ```
-### Install Proxmoxer
+### Install Proxmoxer on Jumpserver
 ***
 **Install python3**
 ```
@@ -257,10 +257,6 @@ pip install proxmoxer
 pip install requests
 pip install paramiko
 pip install openssh_wrapper
-```
-**Install Proxmox Ansible module**
-```
-ansible-galaxy collection install community.general
 ```
 ### FAQs
 ***
