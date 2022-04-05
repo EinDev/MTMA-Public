@@ -36,7 +36,6 @@
           test_command: whoami
       - name: Check operation
         command: "{{ check_command }}"
-        register: operation_check
       rescue:
         - set_fact:
             notify_subject: "Operation not succesful!"
