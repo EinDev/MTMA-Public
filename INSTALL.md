@@ -101,10 +101,10 @@ ExecStop=/usr/local/bin/minikube stop
 WantedBy=multi-user.target
 ```
 ```
-systemctl enable minikube.service
+sudo systemctl enable minikube.service
 ```
 ```
-systemctl start minikube.service
+sudo systemctl start minikube.service
 ```
 **Check minikube Status**
 ```
