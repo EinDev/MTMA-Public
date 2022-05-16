@@ -1,7 +1,23 @@
 ---
-- name: Linux staging maintenance
+- name: Delete all snapshots
   hosts: staging
-  #  serial: 2
+  gather_facts: false
+  tasks:
+    - name: Delete Snapshot
+      community.general.proxmox_snap:
+        api_user: "{{ proxmox_user }}"
+        api_token_id: "{{ proxmox_token_id }}"
+        api_token_secret: "{{ proxmox_token_secret }}"
+        api_host: "{{ proxmox_host }}"
+        validate_certs: no
+        vmid: "{{ proxmox_id }}"
+        snapname: pre-updates
+        state: absent
+      delegate_to: jumpsrv
+
+- name: Linux staging maintenance
+  hosts: production
+  serial: 5
   gather_facts: false
   tasks:
     - name: Create new VM snapshot
@@ -67,19 +83,3 @@
             snapname: pre-updates
             state: absent
           delegate_to: jumpsrv
-
-- name: Delete all snapshots
-  hosts: all_hosts
-  gather_facts: false
-  tasks:
-    - name: Delete Snapshot
-      community.general.proxmox_snap:
-        api_user: "{{ proxmox_user }}"
-        api_token_id: "{{ proxmox_token_id }}"
-        api_token_secret: "{{ proxmox_token_secret }}"
-        api_host: "{{ proxmox_host }}"
-        validate_certs: no
-        vmid: "{{ proxmox_id }}"
-        snapname: pre-updates
-        state: absent
-      delegate_to: jumpsrv

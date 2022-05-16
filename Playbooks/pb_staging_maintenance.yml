@@ -9,13 +9,9 @@
 
 - name: Linux staging maintenance
   hosts: staging
-  #  serial: 2
+  serial: 5
   gather_facts: false
   tasks:
-    - name: Install proxmox API dependency
-      pip:
-        name: proxmoxer
-      delegate_to: jumpsrv
     - name: Create new VM snapshot
       community.general.proxmox_snap:
         api_user: "{{ proxmox_user }}"
