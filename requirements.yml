@@ -1,3 +1,5 @@
 ---
 collections:
-- community.general
+- name: https://github.com/EinDev/community.general.git
+  type: git
+  version: main
