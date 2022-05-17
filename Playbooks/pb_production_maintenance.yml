@@ -1,7 +1,7 @@
 ---
-- name: Linux staging maintenance
-  hosts: staging
-  #  serial: 2
+- name: Linux production maintenance
+  hosts: production
+  serial: 5
   gather_facts: false
   tasks:
     - name: Create new VM snapshot
@@ -66,6 +66,15 @@
             snapname: pre-updates
             state: absent
           delegate_to: jumpsrv
+    - block:
+        - name: CheckDNS
+          shell: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
+        - name: CheckNTP
+          shell: 'timedatectl status | egrep -q "System clock synchronized: yes"'
+      rescue:
+        - set_fact:
+            notify_subject: "NTP/DNS not succesful!"
+        - include_tasks: tasks/send_email.yml
 
 - name: Delete all snapshots
   hosts: all_hosts
@@ -82,12 +91,3 @@
         snapname: pre-updates
         state: absent
       delegate_to: jumpsrv
-    - block:
-        - name: CheckDNS
-          shell: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
-        - name: CheckNTP
-          shell: 'timedatectl status | egrep -q "System clock synchronized: yes"'
-      rescue:
-        - set_fact:
-            notify_subject: "NTP/DNS not succesful!"
-        - include_tasks: tasks/send_email.yml
