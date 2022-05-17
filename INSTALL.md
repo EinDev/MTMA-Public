@@ -145,10 +145,10 @@ sudo apt-get install build-essential
 git clone https://github.com/ansible/awx-operator.git
 cd awx-operator/
 git checkout 0.15.0
+git switch -c 0.15.0
 ```
 **Deploy Ansible AWX**
 ```
-cd awx-operator/
 make deploy
 ```
 **Check AWX Deployment**
@@ -173,7 +173,7 @@ spec:
   service_type: nodeport
   nodeport_port: 8080
   ingress_type: none
-  hostname: awx.fst91.ein.dev
+  hostname: awx.mtma.ein.dev
   admin_user: admin
   admin_email: admin@ein.dev
 ```
@@ -212,7 +212,7 @@ sudo apt install nginx
 ```
 **Create SSL certificat**
 ```
-sudo certbot --nginx -d awx.mtma.ein.dev -d www.awx.mtma.ein.dev
+sudo certbot --nginx -d awx.mtma.ein.dev
 ```
 **Reconfigure Nginx HTTPS listner**
 ```
@@ -241,7 +241,7 @@ sudo nano /etc/nginx/sites-available/default
 
 **Reload Nginx service**
 ```
-systemctl reload nginx.service
+sudo systemctl reload nginx.service
 ```
 ### Install Proxmoxer on Jumpserver
 ***

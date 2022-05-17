@@ -1,21 +1,5 @@
 ---
-- name: Delete all snapshots
-  hosts: staging
-  gather_facts: false
-  tasks:
-    - name: Delete Snapshot
-      community.general.proxmox_snap:
-        api_user: "{{ proxmox_user }}"
-        api_token_id: "{{ proxmox_token_id }}"
-        api_token_secret: "{{ proxmox_token_secret }}"
-        api_host: "{{ proxmox_host }}"
-        validate_certs: no
-        vmid: "{{ proxmox_id }}"
-        snapname: pre-updates
-        state: absent
-      delegate_to: jumpsrv
-
-- name: Linux staging maintenance
+- name: Linux production maintenance
   hosts: production
   serial: 5
   gather_facts: false
@@ -82,8 +66,15 @@
             snapname: pre-updates
             state: absent
           delegate_to: jumpsrv
-<<<<<<< HEAD
-=======
+    - block:
+        - name: CheckDNS
+          shell: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
+        - name: CheckNTP
+          shell: 'timedatectl status | egrep -q "System clock synchronized: yes"'
+      rescue:
+        - set_fact:
+            notify_subject: "NTP/DNS not succesful!"
+        - include_tasks: tasks/send_email.yml
 
 - name: Delete all snapshots
   hosts: all_hosts
@@ -100,13 +91,3 @@
         snapname: pre-updates
         state: absent
       delegate_to: jumpsrv
-    - block:
-        - name: CheckDNS
-          shell: 'nslookup awx.fst91.ein.dev | egrep -q "5.9.222.97"'
-        - name: CheckNTP
-          shell: 'timedatectl status | egrep -q "System clock synchronized: yes"'
-      rescue:
-        - set_fact:
-            notify_subject: "NTP/DNS not succesful!"
-        - include_tasks: tasks/send_email.yml
->>>>>>> aa4d2623b451fd277e1265cdb8aa1663c212b262
