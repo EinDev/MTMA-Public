@@ -112,6 +112,8 @@ Sollte sich der Name der GitHub-Repository geändert haben, muss das Projekt ent
 ![Projekt bearbeiten](img/Create-Credential.png)
 
 ## Update von Ansible/AWX
+Um alle zukünftigen Fälle und Szenarios zu beachten wird empfohlen die Update-Prozeduren des Herstellers zu befolgen: [https://github.com/ansible/awx-operator#upgrading](https://github.com/ansible/awx-operator#upgrading)
+
 ## Neue Credentials hinzufügen
 Die Zugangsdaten werden zu einem bestimmten Job Template zugeordnet, der sich in einem Projekt befindet. Der Job Template nutzt diese Zugangsdaten für den SSH Zugriff auf die Server.
 Der Wartungsuser soll in der Sudo Gruppe aufgenommen sein. Die Zugangsdaten können unter `Credentials` hinzugefügt werden.
@@ -122,7 +124,8 @@ Nach dem Hinzufügen der Zugangsdaten sollen diese zu einem Job Template zugeord
 
 ![Zugangsdaten zuordnen](img/Edit-Projects.PNG)
 
-## 4Benachrichtigungs-Mail ändern
+## Benachrichtigungs-Mail ändern
+## Benachrichtigungs-Mail ändern
 Wenn eine Aufgabe des Playbook oder mehrere fehlschlagen, dann wird eine vordefinierte Mail-Adresse benachrichtigt. Diese Mail, die gesendet wird, enthält alle Debugging Level Informationen und die geworfenen Exceptions über das gesamte Ausführen des Playbook.
 Die Empfängeradresse sowie die SMTP Zugangsdaten können unter`Iventories > MTMA Detailsgeändet` werden.
 ![SMTP anpassen](img/Inventory-Details.PNG)
