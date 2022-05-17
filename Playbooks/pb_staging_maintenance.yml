@@ -9,7 +9,7 @@
 
 - name: Linux staging maintenance
   hosts: staging
-  #  serial: 2
+  serial: 5
   gather_facts: false
   tasks:
     - name: Install proxmox API dependency
