@@ -1,5 +1,5 @@
 # Administrationshandbuch
-![Ablaufschema](img/Ablaufschema.svg)
+![Ablaufschema](img/Ablaufschema.svg?sanitize=true)
 
 ## Einleitung
 Die MTMA GmbH nutzt Ansible-Playbooks zur Automatisierung der Wartungen.
