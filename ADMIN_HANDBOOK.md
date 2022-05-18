@@ -8,7 +8,7 @@ Die Staging-Umgebung wird in regelmäßigen Abständen aktualisiert.
 In der Staging-Umgebung kann das Update dann getestet werden und im Fehlerfall ein fehlerhaftes Update in der Produktionsumgebung so vermieden werden.
 
 Nach jeder Wartung wird ein Check ausgeführt, der die Basisfunktionalität überprüfen soll.
-Wenn dieser Check nicht erfolgreich ist, wird ein Admin benachrichtigt (siehe [Benachrichtigungs-Mail ändern](#))
+Wenn dieser Check nicht erfolgreich ist, wird ein Admin benachrichtigt (siehe [Benachrichtigungs-Mail ändern](#Benachrichtigungs-Mail-ändern))
 und ein Snapshot vor der Wartung wiederhergestellt.
 
 Dazu wird das Playbook in einem Github-Repository gespeichert, von wo es vor jedem Update frisch geklont wird.
@@ -23,7 +23,7 @@ Dieser Server verbindet sich über einen Jumphost per SSH auf die verschiedenen 
 ## Inhaltverzeichnis
 1. [Host hinzufügen](#Host-hinzufügen)
    1. [(opt.) Hostgruppe hinzufügen](#Hostgruppe-hinzufügen)
-      1. [Check(s) definieren](#Check-s-definieren)
+      1. [Check(s) definieren](#Checks-definieren)
    2. [Host anlegen und Hostgruppe bestimmen](#Host-anlegen-und-Hostgruppe-bestimmen)
 2. [Host entfernen](#Host-entfernen)
 3. [Fehlgeschlagene Wartung](#Fehlgeschlagene-Wartung)
@@ -31,7 +31,7 @@ Dieser Server verbindet sich über einen Jumphost per SSH auf die verschiedenen 
    2. [Wartung prüfen](#Wartung-prüfen)
 4. [Wartungs-Zeitplan ändern](#Wartungs-Zeitplan-ändern)
 5. [Funktionales Erweitern vom Playbook](#Funktionales-Erweitern-vom-Playbook)
-6. [Update von Ansible/AWX](#Update-von-Ansible/AWX)
+6. [Update von Ansible/AWX](#Update-von-AnsibleAWX)
 7. [Neue Credentials hinzufügen](#Neue-Credentials-hinzufügen)
 8. [Benachrichtigungs-Mail ändern](#Benachrichtigungs-Mail-ändern)
 
@@ -125,9 +125,8 @@ Nach dem Hinzufügen der Zugangsdaten sollen diese zu einem Job Template zugeord
 ![Zugangsdaten zuordnen](img/Edit-Projects.PNG)
 
 ## Benachrichtigungs-Mail ändern
-## Benachrichtigungs-Mail ändern
 Wenn eine Aufgabe des Playbook oder mehrere fehlschlagen, dann wird eine vordefinierte Mail-Adresse benachrichtigt. Diese Mail, die gesendet wird, enthält alle Debugging Level Informationen und die geworfenen Exceptions über das gesamte Ausführen des Playbook.
-Die Empfängeradresse sowie die SMTP Zugangsdaten können unter`Iventories > MTMA Detailsgeändet` werden.
+Die Empfängeradresse sowie die SMTP Zugangsdaten können unter`Inventories > MTMA Detailsgeändet` werden.
 ![SMTP anpassen](img/Inventory-Details.PNG)
 
 ````yaml
